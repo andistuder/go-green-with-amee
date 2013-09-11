@@ -1,0 +1,12 @@
+%h1 Go Green
+
+%p
+  %strong= "Alternative suppliers to #{@my_supplier["name"]} (#{@my_supplier["national_identification_number"]}):"
+
+%ul
+  - @my_alternatives.each do | ma |
+    %li
+      %a{:href => "https://www.amee.com/companies/#{ma['amee_company_id']}"}= ma["name"]
+
+
+
