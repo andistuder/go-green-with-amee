@@ -1,7 +1,7 @@
 %h1 Go Green
 
 %p
-  %strong= "Alternative suppliers to #{@my_supplier["name"]} (#{@my_supplier["national_identification_number"]}):"
+  %strong= "Alternative suppliers to #{@my_supplier.name} (#{@my_supplier.national_identification_number}):"
 
 %ul
   - @my_alternatives.each do | ma |
