@@ -2,16 +2,14 @@ require 'rest_client'
 require 'json'
 
 class Company
-  attr_accessor :resource
+  attr_accessor :resource, :greener_alternatives
 
-  def initialize
-    user = ENV['API_USER']
-    pass = ENV['API_SECRET']
-
-    self.resource= RestClient::Resource.new 'https://data.amee.com/api/companies', user, pass
+  def initialize(resource)
+    self.greener_alternatives = []
+    self.resource= resource || (RestClient::Resource.new 'https://data.amee.com/api/companies', ENV['API_USER'], ENV['API_SECRET'])
   end
 
-  def find_my_supplier(cro)
+  def find_my_supplier!(cro)
 
     cro = '06630234' if !cro || cro.empty?
 
@@ -23,13 +21,23 @@ class Company
     return self
   end
 
-  def greener_alternatives
-
+  def find_greener_alternatives!
+    self.greener_alternatives = []
     response = self.resource["?uk_sic_2007=#{self.uk_sic_2007}&min_score=#{self.amee_industry_score}"].get
     companies = []
     companies += JSON.parse(response)["companies"]
     companies.delete_if {|x| x["amee_company_id"] == self.amee_company_id }
-    return companies[0..2]
+    companies[0..2].each do |company|
+      self.greener_alternatives << Company.new(self.resource).set_attributes(company)
+
+    end
+    self.greener_alternatives
+  end
+
+
+  def set_attributes(attributes)
+    @attributes = attributes
+    self
   end
 
   private

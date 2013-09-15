@@ -6,7 +6,7 @@
 %ul
   - @my_alternatives.each do | ma |
     %li
-      %a{:href => "https://www.amee.com/companies/#{ma['amee_company_id']}"}= ma["name"]
+      %a{:href => "https://www.amee.com/companies/#{ma.amee_company_id}"}= ma.name
 
 
 
