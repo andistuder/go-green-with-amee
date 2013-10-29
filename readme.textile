@@ -1,0 +1,13 @@
+h1. Go-green app
+
+h2. Development
+
+Start the app
+
+@$ shotgun config.ru@
+
+h2. Deployment
+
+to Heroku
+
+@$ git push <heroku remote> <local branch>:master@

@@ -6,3 +6,22 @@
   %input{:type => "text", :name => "cro"}
   %br
   %input{:type => "submit", :value => "Send"}
+
+%form{name: "myForm", "ng-submit"=>"postData()", "ng-controller" => "GoGreenCtrl"}
+  Enter the CRO number of you supplier:
+  %br
+  %input{name: "input", "ng-model" => "cro", required: ""}/
+  %span.error{"ng-show" => "myForm.input.$error.required"} Required!
+  %input{:type => "submit", :value => "Send", "ng-hide"=>"true"}
+  -#%p result {{items}}
+  -#%br
+  -#%tt cro = {{cro}}
+  -#%br
+  -#%tt myForm.input.$valid = {{myForm.input.$valid}}
+  -#%br
+  -#%tt myForm.input.$error = {{myForm.input.$error}}
+  -#%br
+  -#%tt myForm.$valid = {{myForm.$valid}}
+  -#%br
+  -#%tt myForm.$error.required = {{myForm.$error.required}}
+
